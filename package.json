@@ -8,8 +8,9 @@
   "scripts": {
     "ng": "ng",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
+    "prebuild": "node -e \"const fs = require('fs'); const dir = './dist/frontend'; if (!fs.existsSync(dir)) { fs.mkdirSync(dir, { recursive: true }); }\"",
     "build": "ng build --configuration production --output-hashing none",
-    "build:legacy": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng build --configuration production --output-hashing none",
+    "build:local": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng build --configuration production --output-hashing none",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
