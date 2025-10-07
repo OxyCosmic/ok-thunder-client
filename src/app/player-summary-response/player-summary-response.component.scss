@@ -1,0 +1,166 @@
+player-summary-response-component {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+  background: #0a0e27;
+  color: #e4e6eb;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  h1 {
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  mat-form-field {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    min-width: 200px;
+
+    // Force all text to be white
+    color: #ffffff !important;
+
+    * {
+      color: #ffffff !important;
+    }
+
+    ::ng-deep {
+      .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+      
+      .mat-form-field-flex {
+        background: transparent;
+      }
+
+      .mat-form-field-infix {
+        border-top: 0;
+        padding: 8px 0;
+        color: #ffffff !important;
+      }
+
+      .mat-select {
+        color: #ffffff !important;
+        font-weight: 500;
+        font-size: 1em;
+      }
+
+      .mat-select-trigger {
+        color: #ffffff !important;
+      }
+
+      .mat-select-value {
+        color: #ffffff !important;
+      }
+
+      .mat-select-value-text {
+        color: #ffffff !important;
+      }
+
+      .mat-select-min-line {
+        color: #ffffff !important;
+      }
+
+      .mat-select-placeholder {
+        color: #8b8d98 !important;
+      }
+
+      .mat-select-arrow {
+        color: #667eea !important;
+      }
+
+      .mat-form-field-underline {
+        background-color: #667eea !important;
+        
+        &::before {
+          background-color: rgba(102, 126, 234, 0.3) !important;
+        }
+      }
+
+      .mat-form-field-ripple {
+        background-color: #667eea !important;
+      }
+
+      .mat-form-field-label {
+        color: #b8b9be !important;
+      }
+
+      &.mat-focused {
+        .mat-form-field-label {
+          color: #667eea !important;
+        }
+
+        .mat-select-arrow {
+          color: #667eea !important;
+        }
+      }
+
+      .mat-form-field-appearance-legacy .mat-form-field-underline {
+        background-color: rgba(102, 126, 234, 0.3) !important;
+      }
+
+      // Additional overrides for stubborn Material styles
+      span, div {
+        color: inherit;
+      }
+
+      .mat-select-value span,
+      .mat-select-value-text span {
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  .loading-message {
+    margin: 25px 0;
+    padding: 25px 30px;
+    background: rgba(102, 126, 234, 0.15);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-left: 4px solid #667eea;
+    border-radius: 12px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    
+    p {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.15em;
+      font-weight: 500;
+    }
+  }
+
+  .endpoint-info {
+    margin: 25px 0 15px 0;
+    padding: 15px 20px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 10px;
+    font-weight: 600;
+    color: #b8b9be;
+    font-size: 0.95em;
+  }
+
+  .api-response {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #a5d6a7;
+    padding: 25px;
+    border-radius: 12px;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}

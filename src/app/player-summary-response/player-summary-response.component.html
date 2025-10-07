@@ -1,0 +1,19 @@
+<h1>Player Summary Response Page</h1>
+<div>
+  <mat-form-field>
+    <mat-select [(ngModel)]="playerID" [ngModelOptions]="{standalone: true}" (selectionChange)="changeParams()" [disabled]="isLoading">
+      <mat-option *ngFor="let _ of [].constructor(10); let i = index" [value]="i">Player {{ i }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="isLoading" class="loading-message">
+  <p>⏳ Loading data for Player ID: {{ playerID }}...</p>
+</div>
+
+<!-- API Response -->
+<div *ngIf="!isLoading">
+  <div class="endpoint-info">API response for {{ endpoint }}</div>
+  <pre class="api-response">{{ apiResponse }}</pre>
+</div>

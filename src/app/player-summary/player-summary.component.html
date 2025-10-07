@@ -1,0 +1,326 @@
+<div class="player-summary-container">
+  <h1>Player Summary</h1>
+
+  <!-- Player Selector -->
+  <div class="player-selector" >
+    <label for="playerSelect" class="player-selector-text">Select Player:</label>
+    <select id="playerSelect" [value]="currentPlayerID" (change)="onPlayerChange($event)" [disabled]="isLoading">
+      <option value="0">Player 0</option>
+      <option value="1">Player 1</option>
+      <option value="2">Player 2</option>
+      <option value="3">Player 3</option>
+      <option value="4">Player 4</option>
+      <option value="5">Player 5</option>
+      <option value="6">Player 6</option>
+      <option value="7">Player 7</option>
+      <option value="8">Player 8</option>
+      <option value="9">Player 9</option>
+    </select>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading player data...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="errorMessage && !isLoading" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Player Data -->
+  <div *ngIf="playerSummary && !isLoading" class="player-data">
+    
+    <!-- Player Info -->
+    <div class="player-info">
+      <h2>{{ playerSummary.playerName }}</h2>
+      <h3>from {{ playerSummary.teamName }}</h3>
+      <p>Player ID : {{ playerSummary.playerID }}</p>
+    </div>
+
+    <!-- Season Totals -->
+    <div class="season-totals">
+      <h3>Season Totals</h3>
+      <div class="stats-grid">
+        <div class="stat">
+          <label>Points:</label>
+          <span>{{ playerSummary.totalPoints }}</span>
+        </div>
+        <div class="stat">
+          <label>Shot Attempts:</label>
+          <span>{{ playerSummary.totalShotAttempts }}</span>
+        </div>
+        <div class="stat">
+          <label>Passes:</label>
+          <span>{{ playerSummary.totalPasses }}</span>
+        </div>
+        <div class="stat">
+          <label>Potential Assists:</label>
+          <span>{{ playerSummary.totalPotentialAssists }}</span>
+        </div>
+        <div class="stat">
+          <label>Turnovers:</label>
+          <span>{{ playerSummary.totalTurnovers }}</span>
+        </div>
+        <div class="stat">
+          <label>Passing Turnovers:</label>
+          <span>{{ playerSummary.totalPassingTurnovers }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Player Rankings -->
+    <div class="player-rankings">
+      <h3>🏆 Player Rankings (Out of 10 Players)</h3>
+      <p class="rank-note">Rank 1 = Best Performance in Category</p>
+      
+      <div class="rankings-grid">
+        <!-- Performance Stats Rankings -->
+        <div class="rank-category">
+          <h4>Performance Statistics</h4>
+          
+          <div class="rank-item">
+            <div class="rank-label">
+              <span class="stat-name">Total Points</span>
+              <span class="stat-value">{{ playerSummary.totalPoints }} pts</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar" [style.width.%]="(11 - (playerSummary.totalPointsRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.totalPointsRank || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="rank-item">
+            <div class="rank-label">
+              <span class="stat-name">Shot Attempts</span>
+              <span class="stat-value">{{ playerSummary.totalShotAttempts }} shots</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar" [style.width.%]="(11 - (playerSummary.totalShotAttemptsRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.totalShotAttemptsRank || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="rank-item">
+            <div class="rank-label">
+              <span class="stat-name">Total Passes</span>
+              <span class="stat-value">{{ playerSummary.totalPasses }} passes</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar" [style.width.%]="(11 - (playerSummary.totalPassesRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.totalPassesRank || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="rank-item">
+            <div class="rank-label">
+              <span class="stat-name">Potential Assists</span>
+              <span class="stat-value">{{ playerSummary.totalPotentialAssists }} assists</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar" [style.width.%]="(11 - (playerSummary.totalPotentialAssistsRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.totalPotentialAssistsRank || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="rank-item negative">
+            <div class="rank-label">
+              <span class="stat-name">Turnovers</span>
+              <span class="stat-value">{{ playerSummary.totalTurnovers }} turnovers</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar negative" [style.width.%]="(11 - (playerSummary.totalTurnoversRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.totalTurnoversRank || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="rank-item negative">
+            <div class="rank-label">
+              <span class="stat-name">Passing Turnovers</span>
+              <span class="stat-value">{{ playerSummary.totalPassingTurnovers }} turnovers</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar negative" [style.width.%]="(11 - (playerSummary.totalPassingTurnoversRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.totalPassingTurnoversRank || 'N/A' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Type Rankings -->
+        <div class="rank-category">
+          <h4>Action Type Frequency</h4>
+          
+          <div class="rank-item">
+            <div class="rank-label">
+              <span class="stat-name">Pick & Roll</span>
+              <span class="stat-value">{{ playerSummary.pickAndRollCount }} actions</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar" [style.width.%]="(11 - (playerSummary.pickAndRollCountRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.pickAndRollCountRank || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="rank-item">
+            <div class="rank-label">
+              <span class="stat-name">Isolation</span>
+              <span class="stat-value">{{ playerSummary.isolationCount }} actions</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar" [style.width.%]="(11 - (playerSummary.isolationCountRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.isolationCountRank || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="rank-item">
+            <div class="rank-label">
+              <span class="stat-name">Post-Up</span>
+              <span class="stat-value">{{ playerSummary.postUpCount }} actions</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar" [style.width.%]="(11 - (playerSummary.postUpCountRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.postUpCountRank || 'N/A' }}</span>
+            </div>
+          </div>
+
+          <div class="rank-item">
+            <div class="rank-label">
+              <span class="stat-name">Off-Ball Screen</span>
+              <span class="stat-value">{{ playerSummary.offBallScreenCount }} actions</span>
+            </div>
+            <div class="rank-bar-container">
+              <div class="rank-bar" [style.width.%]="(11 - (playerSummary.offBallScreenCountRank || 10)) * 10"></div>
+              <span class="rank-number">Rank #{{ playerSummary.offBallScreenCountRank || 'N/A' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Halfcourt Action Counts -->
+    <div class="action-counts">
+      <h3>Halfcourt Action Counts</h3>
+      <div class="stats-grid">
+        <div class="stat">
+          <label>Pick & Roll:</label>
+          <span>{{ playerSummary.pickAndRollCount }}</span>
+        </div>
+        <div class="stat">
+          <label>Isolation:</label>
+          <span>{{ playerSummary.isolationCount }}</span>
+        </div>
+        <div class="stat">
+          <label>Post-up:</label>
+          <span>{{ playerSummary.postUpCount }}</span>
+        </div>
+        <div class="stat">
+          <label>Off-Ball Screen:</label>
+          <span>{{ playerSummary.offBallScreenCount }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pick & Roll Stats -->
+    <div class="action-section">
+      <h3>Pick & Roll</h3>
+      <div class="stats-grid">
+        <div class="stat">
+          <label>Points:</label>
+          <span>{{ playerSummary.pickAndRoll.totalPoints }}</span>
+        </div>
+        <div class="stat">
+          <label>Shots:</label>
+          <span>{{ playerSummary.pickAndRoll.totalShotAttempts }}</span>
+        </div>
+        <div class="stat">
+          <label>Passes:</label>
+          <span>{{ playerSummary.pickAndRoll.totalPasses }}</span>
+        </div>
+        <div class="stat">
+          <label>Potential Assists:</label>
+          <span>{{ playerSummary.pickAndRoll.totalPotentialAssists }}</span>
+        </div>
+      </div>
+      <p class="event-count">{{ (playerSummary.pickAndRoll.shots?.length || 0) }} shots, {{ (playerSummary.pickAndRoll.passes?.length || 0) }} passes, {{ (playerSummary.pickAndRoll.turnovers?.length || 0) }} turnovers</p>
+    </div>
+
+    <!-- Isolation Stats -->
+    <div class="action-section">
+      <h3>Isolation</h3>
+      <div class="stats-grid">
+        <div class="stat">
+          <label>Points:</label>
+          <span>{{ playerSummary.isolation.totalPoints }}</span>
+        </div>
+        <div class="stat">
+          <label>Shots:</label>
+          <span>{{ playerSummary.isolation.totalShotAttempts }}</span>
+        </div>
+        <div class="stat">
+          <label>Passes:</label>
+          <span>{{ playerSummary.isolation.totalPasses }}</span>
+        </div>
+        <div class="stat">
+          <label>Potential Assists:</label>
+          <span>{{ playerSummary.isolation.totalPotentialAssists }}</span>
+        </div>
+      </div>
+      <p class="event-count">{{ (playerSummary.isolation.shots?.length || 0) }} shots, {{ (playerSummary.isolation.passes?.length || 0) }} passes, {{ (playerSummary.isolation.turnovers?.length || 0) }} turnovers</p>
+    </div>
+
+    <!-- Post-up Stats -->
+    <div class="action-section">
+      <h3>Post-up</h3>
+      <div class="stats-grid">
+        <div class="stat">
+          <label>Points:</label>
+          <span>{{ playerSummary.postUp.totalPoints }}</span>
+        </div>
+        <div class="stat">
+          <label>Shots:</label>
+          <span>{{ playerSummary.postUp.totalShotAttempts }}</span>
+        </div>
+        <div class="stat">
+          <label>Passes:</label>
+          <span>{{ playerSummary.postUp.totalPasses }}</span>
+        </div>
+        <div class="stat">
+          <label>Potential Assists:</label>
+          <span>{{ playerSummary.postUp.totalPotentialAssists }}</span>
+        </div>
+      </div>
+      <p class="event-count">{{ (playerSummary.postUp.shots?.length || 0) }} shots, {{ (playerSummary.postUp.passes?.length || 0) }} passes, {{ (playerSummary.postUp.turnovers?.length || 0) }} turnovers</p>
+    </div>
+
+    <!-- Off-Ball Screen Stats -->
+    <div class="action-section">
+      <h3>Off-Ball Screen</h3>
+      <div class="stats-grid">
+        <div class="stat">
+          <label>Points:</label>
+          <span>{{ playerSummary.offBallScreen.totalPoints }}</span>
+        </div>
+        <div class="stat">
+          <label>Shots:</label>
+          <span>{{ playerSummary.offBallScreen.totalShotAttempts }}</span>
+        </div>
+        <div class="stat">
+          <label>Passes:</label>
+          <span>{{ playerSummary.offBallScreen.totalPasses }}</span>
+        </div>
+        <div class="stat">
+          <label>Potential Assists:</label>
+          <span>{{ playerSummary.offBallScreen.totalPotentialAssists }}</span>
+        </div>
+      </div>
+      <p class="event-count">{{ (playerSummary.offBallScreen.shots?.length || 0) }} shots, {{ (playerSummary.offBallScreen.passes?.length || 0) }} passes, {{ (playerSummary.offBallScreen.turnovers?.length || 0) }} turnovers</p>
+    </div>
+
+    <!-- Raw JSON Debug (Optional) -->
+    <details class="debug-section">
+      <summary>View Raw JSON Data</summary>
+      <pre>{{ playerSummary | json }}</pre>
+    </details>
+
+  </div>
+</div>

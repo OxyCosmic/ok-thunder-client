@@ -1,0 +1,166 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body { 
+  height: 100%; 
+  margin: 0;
+}
+
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #0a0e27;
+  color: #e4e6eb;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling for dark mode */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.4);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.6);
+}
+
+/* Material Form Field Dark Mode Styling - Aggressive Overrides */
+.mat-form-field {
+  color: #ffffff !important;
+
+  * {
+    color: inherit;
+  }
+
+  .mat-select-value,
+  .mat-select-value-text,
+  .mat-select-placeholder,
+  .mat-select-trigger,
+  .mat-select-min-line {
+    color: #ffffff !important;
+  }
+
+  .mat-select-arrow {
+    color: #667eea !important;
+  }
+
+  .mat-form-field-label {
+    color: #b8b9be !important;
+  }
+
+  .mat-form-field-infix {
+    color: #ffffff !important;
+  }
+
+  // Underline styling
+  .mat-form-field-underline {
+    background-color: #667eea !important;
+  }
+
+  .mat-form-field-ripple {
+    background-color: #667eea !important;
+  }
+
+  // Legacy appearance underline
+  &.mat-form-field-appearance-legacy {
+    .mat-form-field-underline {
+      background-color: #667eea !important;
+    }
+  }
+
+  &.mat-focused {
+    .mat-form-field-label {
+      color: #667eea !important;
+    }
+
+    .mat-form-field-underline {
+      background-color: #667eea !important;
+    }
+
+    .mat-form-field-ripple {
+      background-color: #667eea !important;
+    }
+  }
+}
+
+.mat-select {
+  color: #ffffff !important;
+}
+
+.mat-select-trigger {
+  color: #ffffff !important;
+}
+
+.mat-select-value {
+  color: #ffffff !important;
+}
+
+.mat-select-value-text {
+  color: #ffffff !important;
+}
+
+.mat-select-min-line {
+  color: #ffffff !important;
+}
+
+// Override Material's default color classes
+.mat-primary {
+  .mat-select-value {
+    color: #ffffff !important;
+  }
+}
+
+/* Material Select Dropdown Dark Mode Styling */
+.mat-select-panel {
+  background: #1a1f3a !important;
+  border: 1px solid rgba(102, 126, 234, 0.3) !important;
+  border-radius: 8px !important;
+}
+
+.mat-option {
+  color: #ffffff !important;
+  background: #1a1f3a !important;
+  
+  &:hover {
+    background: rgba(102, 126, 234, 0.2) !important;
+  }
+  
+  &.mat-selected {
+    background: rgba(102, 126, 234, 0.3) !important;
+    color: #ffffff !important;
+  }
+  
+  &.mat-active {
+    background: rgba(102, 126, 234, 0.25) !important;
+  }
+}
+
+.mat-option-text {
+  color: #ffffff !important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #ffffff !important;
+}
+
+/* Override any Material theme colors */
+.mat-select-value,
+.mat-select-min-line {
+  color: #ffffff !important;
+}
+
