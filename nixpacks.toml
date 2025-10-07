@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["nodejs-16_x", "npm-8_x"]
+nixPkgs = ["nodejs-16_x"]
 
 [phases.install]
 cmds = ["npm ci --force"]
@@ -9,3 +9,6 @@ cmds = ["npm run build"]
 
 [start]
 cmd = "npm run deploy"
+
+[variables]
+NODE_VERSION = "16.15.1"

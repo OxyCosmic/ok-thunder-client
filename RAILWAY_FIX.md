@@ -50,10 +50,12 @@ This will use the OpenSSL legacy provider flag needed for Node 17+.
 
 ## For Railway Deployment
 Railway will automatically:
-1. Use Node 16.15.1 (from .nvmrc and nixpacks.toml)
+1. Use Node 16.15.1 (from .nvmrc, .node-version, and nixpacks.toml)
 2. Run `npm ci --force` to install dependencies
-3. Run `npm run build` (works fine with Node 16)
+3. Run `npm run build` (uses node --openssl-legacy-provider flag as fallback)
 4. Start with `npm run deploy`
+
+**Note:** The build command now uses `node --openssl-legacy-provider` directly to ensure compatibility with any Node version Railway might use.
 
 ## Next Steps
 1. Commit all changes: `git add . && git commit -m "Fix Railway deployment configuration"`
