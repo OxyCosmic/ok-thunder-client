@@ -8,7 +8,8 @@
   "scripts": {
     "ng": "ng",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng build --configuration production --output-hashing none",
+    "build": "ng build --configuration production --output-hashing none",
+    "build:legacy": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng build --configuration production --output-hashing none",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
